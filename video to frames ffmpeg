@@ -1,0 +1,23 @@
+import subprocess,os
+
+def convert(ifile,tar):
+    cmd=f"ffmpeg -i {ifile} -vf fps=3 {tar}/pic_%d.jpg"
+    cmdfile="v.sh"
+    obj=open(cmdfile,"w")
+    obj.write(cmd)
+    obj.close()
+    rtcode=subprocess.call("sh v.sh",shell=True)
+    print(rtcode)
+
+convert('f.mp4','pic')
+
+
+def dire(path):
+    with os.scandir(path) as dirs:
+        for entry in dirs:
+            print(entry.name)
+
+dire('pic')
+
+#ffmpeg -i video/s.mp4 -vf fps=3 pic/pic_%d.jpg
+#ffmpeg -i [file name] -vf fps=3 [output]
